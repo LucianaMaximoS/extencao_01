@@ -11,18 +11,26 @@
             text-align: center;
             margin: 50px;
             background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
         }
-                /* centralizar o container para os formulários */
-                .container {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            max-width: 400px;
-            margin: auto;
-            margin-bottom: 20px;
+    
+        /* Centralizar o container para os formulários e textos */
+        .container {
+            width: 30%;                /* Garante que o input ocupe toda a largura do contêiner pai */
+            padding: 10px;              /* Cria um espaçamento interno nos campos */
+            margin: 10px 0;              /* Espaçamento de 5px entre os campos, com 0 nas laterais */
+            border-radius: 5px;         /* Bordas arredondadas */
+            border: 1px solid #ccc;     /* Borda cinza clara */
+            display: block;             /* Faz o campo ocupar toda a largura disponível */
+            text-align: center;         /* Centraliza o texto dentro dos campos */
+            box-sizing: border-box;     /* Inclui bordas e preenchimento no cálculo da largura total */
+            max-width: 100%;            /* Garante que os campos não ultrapassem a largura do contêiner pai */
         }
-
+    
         /* Estilo dos botões */
         button {
             margin-top: 10px;
@@ -31,23 +39,30 @@
             color: white;
             border: none;
             cursor: pointer;
+            width: 60%;
+            border-radius: 5px;
         }
-
+    
         /* Estilo do botão desativado */
         button:disabled {
             background-color: gray;
+            
         }
-
-        /* Estilo dos campos de entrada (texto, e-mail, data e seleção) */
-        input[type="text"], input[type="email"], input[type="date"], select {
-            width: 100%;
-            padding: 10px;
-            margin: 5px 0;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-
+    
+    /* Estilo dos campos de entrada (texto, e-mail, data e seleção) */
+    input[type="text"], input[type="email"], input[type="date"], select {
+        width: 150%;
+        padding: 10px;
+        margin: 5px 0;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        display: block;
+        text-align: center;
+        box-sizing: border-box;
+        max-width: 100%;
+    }
     </style>
+    
     </head>
 <body>
        <!-- Tela de "Pré-Capa" -->
@@ -85,6 +100,7 @@
 
         <!-- Mensagem de confirmação -->
         <p id="confirmacao"></p>
+    </div>
 
 </body>
 </html>
