@@ -15,9 +15,41 @@
     </style>
     </head>
 <body>
-        <!-- Tela de Pré-Capa (primeira etapa do processo) -->
-        <div id="pre-capa" class="container">
-            <h1>Bem-vindo!</h1>
-            <p>Testando minha primeiro versionamento no Git Hub</p>
+       <!-- Tela de Pré-Capa -->
+    <div id="pre-capa" class="container">
+        <h1>Bem-vindo!</h1>
+        <p>Para agendar sua mentoria com Luciana Máximo, informe seu nome completo e e-mail.</p>
+        
+        <form id="pre-capa-form">
+            <label for="nome">Nome Completo:</label>
+            <input type="text" id="nome" required> <!-- label com o nome do mentorado -->
+
+            <label for="email">Endereço de E-mail:</label>
+            <input type="email" id="email" required> <!-- label com o e-maildo mentorado -->
+
+            <button type="submit">Continuar</button> <!-- Botão que libera a parte do agendamento -->
+        </form>
+    </div>
+
+    <!-- Página Principal de Agendamento (após o botão de cima ser ativado essa parte é liberada) -->
+    <div id="agendamento" class="container disabled">
+        <h1>Agendar Mentoria com Luciana Máximo</h1>
+
+        <!-- escolher a data -->
+        <label for="date">Escolha uma data:</label>
+        <input type="date" id="date" disabled>
+
+        <!-- escolher o horário -->
+        <label for="time">Escolha um horário:</label>
+        <select id="time" disabled>
+            <option value="">Selecione uma data primeiro</option>
+        </select>
+
+        <!-- confirmar o agendamento -->
+        <button id="agendar" disabled>Agendar</button>
+
+        <!-- Mensagem de confirmação -->
+        <p id="confirmacao"></p>
+
 </body>
 </html>
