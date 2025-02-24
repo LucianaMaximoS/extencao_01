@@ -5,10 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agendar Mentoria</title>
-    <link rel="stylesheet" href="styles.css">
-
+    
     <style>
-        /* Estilos gerais da página */
+        /* Reset básico */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -27,19 +26,18 @@
             padding: 20px;
         }
 
-        /* Container centralizado */
         .container {
             width: 100%;
-            max-width: 400px; /* Define um limite para telas grandes */
-            padding: 20px;
+            max-width: 400px; /* Máximo de largura para telas grandes */
             background-color: white;
+            padding: 20px;
             border-radius: 8px;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
         }
 
         h1 {
             font-size: 22px;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
 
         p {
@@ -47,20 +45,18 @@
             margin-bottom: 15px;
         }
 
-        /* Estilo dos inputs e select */
         input[type="text"],
         input[type="email"],
         input[type="date"],
         select {
             width: 100%;
-            padding: 10px;
-            margin: 8px 0;
+            padding: 12px;
+            margin: 10px 0;
             border-radius: 5px;
             border: 1px solid #ccc;
             text-align: center;
         }
 
-        /* Botão estilizado */
         button {
             width: 100%;
             padding: 12px;
@@ -78,7 +74,6 @@
             cursor: not-allowed;
         }
 
-        /* Mensagem de confirmação */
         #confirmacao {
             margin-top: 10px;
             font-size: 18px;
@@ -86,13 +81,14 @@
             color: green;
         }
 
-        /* Responsividade para telas menores */
+        /* Responsividade */
         @media (max-width: 600px) {
             body {
                 padding: 10px;
             }
 
             .container {
+                width: 90%;
                 padding: 15px;
             }
 
