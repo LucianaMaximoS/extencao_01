@@ -2,63 +2,65 @@
 <html lang="pt">
 
 <head>
-    <meta charset="UTF-8"> <!-- Define a codificação de caracteres para suportar acentos -->
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Ajusta a visualização para dispositivos móveis -->
-    <title>Agendar Mentoria</title> <!-- Define o título da página -->
-    <link rel="stylesheet" href="styles.css"> <!-- Importa o arquivo CSS externo -->
+    <title>Agendar Mentoria</title>
+    <link rel="stylesheet" href="styles.css">
 
     <style>
         /* Estilos gerais da página */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            margin: 0;
-            /* Removendo margens para melhor adaptação */
-            padding: 20px;
             background-color: #2b874a;
             display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: column;
             min-height: 100vh;
-            box-sizing: border-box;
-        }
-
-        /* Centralizar o container para os formulários e textos */
-        .container {
-            width: 90%;
-            /* Ajusta melhor para dispositivos menores */
-            max-width: 400px;
-            /* Limita o tamanho em telas grandes */
             padding: 20px;
-            margin: 10px auto;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            display: block;
-            /* Faz o campo ocupar toda a largura disponível */
-            text-align: center;
-            /* Centraliza o texto dentro dos campos */
-            box-sizing: border-box;
-
         }
 
-        /* Estilização dos inputs e select */
+        /* Container centralizado */
+        .container {
+            width: 100%;
+            max-width: 400px; /* Define um limite para telas grandes */
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        /* Estilo dos inputs e select */
         input[type="text"],
         input[type="email"],
         input[type="date"],
         select {
             width: 100%;
-            /* Garante que o input se ajuste ao container */
             padding: 10px;
-            margin: 5px 0;
+            margin: 8px 0;
             border-radius: 5px;
             border: 1px solid #ccc;
             text-align: center;
-            box-sizing: border-box;
         }
 
-        /* Estilo dos botões */
+        /* Botão estilizado */
         button {
             width: 100%;
             padding: 12px;
@@ -71,35 +73,35 @@
             margin-top: 10px;
         }
 
-        /* Estilo do botão desativado */
         button:disabled {
             background-color: gray;
+            cursor: not-allowed;
         }
-
-
-
 
         /* Mensagem de confirmação */
         #confirmacao {
             margin-top: 10px;
+            font-size: 18px;
             font-weight: bold;
-        }
-
-        /* Classe para desativar a tela de agendamento até preencher a pré-capa */
-        .disabled {
-            opacity: 0.5;
-            pointer-events: none;
+            color: green;
         }
 
         /* Responsividade para telas menores */
         @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+
             .container {
-                width: 95%;
                 padding: 15px;
             }
 
-            body {
-                padding: 10px;
+            h1 {
+                font-size: 20px;
+            }
+
+            p {
+                font-size: 14px;
             }
         }
     </style>
@@ -107,50 +109,38 @@
 
 <body>
 
-    <!-- Tela de Pré-Capa (primeira etapa do processo) -->
     <div id="pre-capa" class="container">
         <h1>Bem-vindo!</h1>
         <p>Para agendar sua mentoria com Reinaldo Turbino, informe seu nome completo e e-mail.</p>
 
         <form id="pre-capa-form">
             <label for="nome">Nome Completo:</label>
-            <input type="text" id="nome" required> <!-- Campo para nome -->
+            <input type="text" id="nome" required>
 
             <label for="email">Endereço de E-mail:</label>
-            <input type="email" id="email" required> <!-- Campo para e-mail -->
+            <input type="email" id="email" required>
 
-            <button type="submit">Continuar</button> <!-- Botão que libera o agendamento -->
+            <button type="submit">Continuar</button>
         </form>
     </div>
 
-    <!-- Página Principal de Agendamento (inicialmente desativada) -->
     <div id="agendamento" class="container disabled">
         <h1>Agendar Mentoria com Reinaldo Turbino</h1>
 
-        <!-- Campo para escolher a data -->
         <label for="date">Escolha uma data:</label>
         <input type="date" id="date" disabled>
 
-        <!-- Campo para escolher o horário -->
         <label for="time">Escolha um horário:</label>
         <select id="time" disabled>
             <option value="">Selecione uma data primeiro</option>
         </select>
 
-        <!-- Botão para confirmar o agendamento -->
         <button id="agendar" disabled>Agendar</button>
-
-        <!-- Mensagem de confirmação -->
         <p id="confirmacao"></p>
     </div>
 
-    <!-- Importação do EmailJS e do script de funcionalidade -->
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            emailjs.init("AON-Cb6sswz_IoF3b"); // Inicializa o EmailJS
-
-            // Captura os elementos do formulário e da página
             const preCapaForm = document.getElementById("pre-capa-form");
             const nomeInput = document.getElementById("nome");
             const emailInput = document.getElementById("email");
@@ -160,9 +150,8 @@
             const agendarBtn = document.getElementById("agendar");
             const confirmacao = document.getElementById("confirmacao");
 
-            // Evento ao enviar o formulário inicial
             preCapaForm.addEventListener("submit", function (event) {
-                event.preventDefault(); // Impede o recarregamento da página
+                event.preventDefault();
 
                 const nome = nomeInput.value.trim();
                 const email = emailInput.value.trim();
@@ -171,27 +160,24 @@
                     localStorage.setItem("nome", nome);
                     localStorage.setItem("email", email);
 
-                    agendamentoDiv.classList.remove("disabled"); // Ativa a tela de agendamento
-                    dateInput.removeAttribute("disabled"); // Habilita a escolha da data
+                    agendamentoDiv.classList.remove("disabled");
+                    dateInput.removeAttribute("disabled");
                 } else {
                     alert("Por favor, preencha todos os campos.");
                 }
             });
 
-            // Define a data mínima para o agendamento (a partir do dia seguinte)
             let today = new Date();
             today.setDate(today.getDate() + 1);
             let minDate = today.toISOString().split("T")[0];
             dateInput.setAttribute("min", minDate);
 
-            // Evento ao selecionar uma data
             dateInput.addEventListener("change", function () {
                 if (!dateInput.value) return;
 
                 let selectedDate = new Date(dateInput.value + "T00:00:00");
                 let dayOfWeek = selectedDate.getDay();
 
-                // Permite apenas agendamentos de segunda a quinta-feira
                 if (![1, 2, 3, 4].includes(dayOfWeek)) {
                     alert("Mentorias são apenas de segunda a quinta-feira.");
                     dateInput.value = "";
@@ -200,11 +186,10 @@
                     agendarBtn.disabled = true;
                     return;
                 }
-                // Recupera horários já reservados do localStorage
+
                 let agendamentos = JSON.parse(localStorage.getItem("agendamentos")) || {};
                 let horariosReservados = agendamentos[dateInput.value] || [];
 
-                // Popula a lista de horários disponíveis (13h às 17h), excluindo os reservados
                 timeSelect.innerHTML = '<option value="">Selecione um horário</option>';
                 for (let hour = 13; hour <= 17; hour++) {
                     let horarioFormatado = `${hour}:00`;
@@ -221,12 +206,10 @@
                 agendarBtn.disabled = true;
             });
 
-            // Habilita o botão "Agendar" apenas quando um horário é selecionado
             timeSelect.addEventListener("change", function () {
                 agendarBtn.disabled = timeSelect.value === "";
             });
 
-            // Evento ao clicar no botão de agendamento
             agendarBtn.addEventListener("click", function () {
                 if (dateInput.value && timeSelect.value) {
                     const nome = localStorage.getItem("nome");
@@ -234,53 +217,27 @@
                     const data = dateInput.value;
                     const horario = timeSelect.value;
 
-                    // Obtém os horários já reservados para esta data
                     let agendamentos = JSON.parse(localStorage.getItem("agendamentos")) || {};
-
-                    // Adiciona o novo agendamento para esta data
                     if (!agendamentos[data]) {
                         agendamentos[data] = [];
                     }
                     agendamentos[data].push(horario);
-
-                    // Salva no localStorage
                     localStorage.setItem("agendamentos", JSON.stringify(agendamentos));
 
-                    // Parâmetros para envio de e-mail via EmailJS
-                    let templateParams = {
-                        to_email: email,
-                        from_email: "lucianamaximo11@hotmail.com",
-                        nome: nome,
-                        data: data,
-                        horario: horario
-                    };
+                    confirmacao.textContent = `Mentoria agendada para ${data} às ${horario}!`;
+                    confirmacao.style.color = "green";
+                    confirmacao.style.fontSize = "18px";
+                    confirmacao.style.fontWeight = "bold";
 
-                    // Envio do e-mail de confirmação
-                    emailjs.send("service_mvc61at", "template_gv47our", templateParams)
-                        .then(function (response) {
-                            confirmacao.textContent = `Mentoria agendada para ${data} às ${horario}!`;
-                            confirmacao.style.color = "green";
-                            confirmacao.style.fontSize = "18px";
-                            confirmacao.style.fontWeight = "bold";
-
-                            // Desativar todos os campos após o agendamento
-                            nomeInput.disabled = true;
-                            emailInput.disabled = true;
-                            preCapaForm.querySelector("button").disabled = true;
-                            dateInput.disabled = true;
-                            timeSelect.disabled = true;
-                            agendarBtn.disabled = true;
-                        }, function (error) {
-                            alert("Erro ao enviar email. Tente novamente.");
-                        });
+                    nomeInput.disabled = true;
+                    emailInput.disabled = true;
+                    dateInput.disabled = true;
+                    timeSelect.disabled = true;
+                    agendarBtn.disabled = true;
                 }
             });
-
-
-
-
         });
     </script>
-</body>
 
+</body>
 </html>
