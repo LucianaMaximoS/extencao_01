@@ -13,21 +13,26 @@
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            margin: 50px;
+            margin: 0;
+            /* Removendo margens para melhor adaptação */
+            padding: 20px;
             background-color: #2b874a;
             display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            height: 100vh;
+            min-height: 100vh;
+            box-sizing: border-box;
         }
 
         /* Centralizar o container para os formulários e textos */
         .container {
-            width: 30%;
-            /* Garante que o input ocupe toda a largura do contêiner pai */
-            padding: 10px;
-            margin: 10px 0;
+            width: 90%;
+            /* Ajusta melhor para dispositivos menores */
+            max-width: 400px;
+            /* Limita o tamanho em telas grandes */
+            padding: 20px;
+            margin: 10px auto;
             border-radius: 5px;
             border: 1px solid #ccc;
             display: block;
@@ -35,18 +40,35 @@
             text-align: center;
             /* Centraliza o texto dentro dos campos */
             box-sizing: border-box;
-            max-width: 100%;
-            /* Garante que os campos não ultrapassem a largura do contêiner pai */
+
+        }
+
+        /* Estilização dos inputs e select */
+        input[type="text"],
+        input[type="email"],
+        input[type="date"],
+        select {
+            width: 100%;
+            /* Garante que o input se ajuste ao container */
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            text-align: center;
+            box-sizing: border-box;
         }
 
         /* Estilo dos botões */
         button {
-            margin-top: 10px;
-            padding: 10px;
+            width: 100%;
+            padding: 12px;
             background-color: #23f91c;
             color: white;
             border: none;
+            border-radius: 5px;
+            font-size: 16px;
             cursor: pointer;
+            margin-top: 10px;
         }
 
         /* Estilo do botão desativado */
@@ -55,21 +77,6 @@
         }
 
 
-        /* Estilo dos campos de entrada (texto, e-mail, data e seleção) */
-        input[type="text"],
-        input[type="email"],
-        input[type="date"],
-        select {
-            width: 150%;
-            padding: 10px;
-            margin: 5px 0;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            display: block;
-            text-align: center;
-            box-sizing: border-box;
-            max-width: 100%;
-        }
 
 
         /* Mensagem de confirmação */
@@ -82,6 +89,18 @@
         .disabled {
             opacity: 0.5;
             pointer-events: none;
+        }
+
+        /* Responsividade para telas menores */
+        @media (max-width: 600px) {
+            .container {
+                width: 95%;
+                padding: 15px;
+            }
+
+            body {
+                padding: 10px;
+            }
         }
     </style>
 </head>
